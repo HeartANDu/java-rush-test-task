@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{main_layout :: layout(~{::body})}">
+<body>
+    <h2>Добавить комплектующие</h2>
+    <!--/*@thymesVar id="part" type="com.test.parts.model.Part"*/-->
+    <form action="#" th:action="@{/parts/add}" th:object="${part}" method="post">
+        <label for="name">Наименование</label>
+        <input type="text" th:field="*{name}" id="name" placeholder="Наименование" /><br />
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span><br />
+        <label for="required">Необходимость</label>
+        <input type="checkbox" th:field="*{required}" id="required" /><br />
+        <span th:if="${#fields.hasErrors('required')}" th:errors="*{required}"></span><br />
+        <label for="inStock">Количество</label>
+        <input type="number" th:field="*{inStock}" id="inStock" /><br />
+        <span th:if="${#fields.hasErrors('inStock')}" th:errors="*{inStock}"></span><br />
+        <button type="submit">Добавить</button>
+    </form>
+</body>
+</html>

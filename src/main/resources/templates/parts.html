@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{main_layout :: layout(~{::body})}">
+<body>
+    <h2>Компьютерные комплектующие</h2>
+    <div>
+        <a th:href="@{/parts}">Все комплектующие</a><br />
+        <a th:href="@{/parts(filter='required')}">Комплектующие, необходимые для сборки</a><br />
+        <a th:href="@{/parts(filter='not_required')}">Опциональные комплектующие</a><br />
+    </div>
+    <br />
+    <div>
+        <form th:action="@{/parts/search}" method="get">
+            <label for="name">Поиск по названию:</label>
+            <input id="name" name="name" type="text" />
+            <button type="submit">Найти</button>
+        </form>
+    </div>
+    <br />
+    <table>
+        <thead style="font-weight: bold;">
+            <tr>
+                <td>Наименование</td>
+                <td>Необходимость</td>
+                <td>Количество</td>
+                <td colspan="2"></td>
+            </tr>
+        </thead>
+        <!--/*@thymesVar id="part" type="com.test.parts.model.Part"*/-->
+        <th:block th:each="part : ${parts}">
+            <tr>
+                <td th:text="${part.getName()}"></td>
+                <td th:text="${part.isRequired()} ? 'да' : 'нет'"></td>
+                <td th:text="${part.getInStock()}"></td>
+                <td>
+                    <a th:href="@{/parts/edit/{id}(id=${part.getId()})}">Редактировать</a>
+                </td>
+                <td>
+                    <a th:href="@{/parts/delete/{id}(id=${part.getId()})}">Удалить</a>
+                </td>
+            </tr>
+        </th:block>
+        <tr>
+            <td>Можно собрать</td>
+            <td th:text="${buildable}"></td>
+            <td colspan="3">компьютеров</td>
+        </tr>
+    </table>
+    <div>
+        <span th:if="${parts.hasPrevious()}">
+            <a th:href="@{${uri}(page=${parts.previousPageable().getPageNumber()})}">Назад</a>
+        </span>
+        <span th:if="${parts.hasNext()}">
+                <a th:href="@{${uri}(page=${parts.nextPageable().getPageNumber()})}">Вперед</a>
+        </span>
+    </div>
+    <br />
+    <div>
+        <a th:href="@{/parts/add}">Добавить комплектующие</a>
+    </div>
+</body>
+</html>
