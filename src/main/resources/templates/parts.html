@@ -16,7 +16,7 @@
         </form>
     </div>
     <br />
-    <table>
+    <table class="parts-table">
         <thead style="font-weight: bold;">
             <tr>
                 <td>Наименование</td>
@@ -27,10 +27,10 @@
         </thead>
         <!--/*@thymesVar id="part" type="com.test.parts.model.Part"*/-->
         <th:block th:each="part : ${parts}">
-            <tr>
+            <tr style="border: 1px solid black">
                 <td th:text="${part.getName()}"></td>
-                <td th:text="${part.isRequired()} ? 'да' : 'нет'"></td>
-                <td th:text="${part.getInStock()}"></td>
+                <td th:text="${part.isRequired()} ? 'да' : 'нет'" class="parts-table-centered"></td>
+                <td th:text="${part.getInStock()}" class="parts-table-centered"></td>
                 <td>
                     <a th:href="@{/parts/edit/{id}(id=${part.getId()})}">Редактировать</a>
                 </td>
@@ -39,9 +39,9 @@
                 </td>
             </tr>
         </th:block>
-        <tr>
+        <tr class="parts-table-buildable">
             <td>Можно собрать</td>
-            <td th:text="${buildable}"></td>
+            <td th:text="${buildable}" class="parts-table-centered"></td>
             <td colspan="3">компьютеров</td>
         </tr>
     </table>

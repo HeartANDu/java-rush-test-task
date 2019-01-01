@@ -1,0 +1,17 @@
+.parts-table {
+    border-collapse: collapse;
+}
+
+.parts-table tr,
+.parts-table td {
+    border: 1px solid black;
+}
+
+.parts-table-buildable td {
+    background-color: #dddddd;
+    border: none;
+}
+
+.parts-table-centered {
+    text-align: center;
+}
